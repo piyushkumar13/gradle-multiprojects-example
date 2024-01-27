@@ -12,9 +12,9 @@ println "My property is : " + myPropName // Here if this myPropName is not found
 println "My property is : " + property("myPropName") // Here if this myPropName is not found, an unknown property exception is thrown.
 println "My property is : " + findProperty("Some-nonexisting-property") // Here if the property is not found, it will not throw exception, it will just return null.
 
-if (hasProperty("Some-nonexisting-property")){
+if (hasProperty("Some-nonexisting-property")) {
     println "Property exists"
-}else {
+} else {
     println "Property does not exists"
 }
 
@@ -46,7 +46,7 @@ subprojects {
     dependencyManagement {
         dependencies {
             dependency group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
-            dependency group: 'org.junit', name:'junit-bom', version: '5.9.1'
+            dependency group: 'org.junit', name: 'junit-bom', version: '5.9.1'
         }
     }
 }
