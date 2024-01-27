@@ -1,0 +1,24 @@
+plugins {
+    id 'application'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+group = 'org.example.mymodule1'
+
+application {
+    mainClass = 'org.example.mymodule1.Main'
+}
+
+println "The global version is $myProjVersion"
+println "The versio is $version"
+
+dependencies {
+
+    implementation 'org.apache.commons:commons-lang3' // Note : using without version.
+    testImplementation platform('org.junit:junit-bom') // Note : using the junit bom without version.
+    testImplementation 'org.junit.jupiter:junit-jupiter' // Note : using without version.
+}
+
+shadowJar {
+    archiveClassifier.set('fat')
+}

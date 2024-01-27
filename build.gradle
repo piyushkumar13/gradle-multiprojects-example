@@ -1,0 +1,84 @@
+plugins {
+    id("io.spring.dependency-management") version "1.1.4" // This can be used for non-spring project.
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext.myProjVersion = "1.0-SNAPSHOT" // exposes the variable globally across modules
+
+println "My property is : " + myPropName // Here if this myPropName is not found, an unknown property exception is thrown.
+println "My property is : " + property("myPropName") // Here if this myPropName is not found, an unknown property exception is thrown.
+println "My property is : " + findProperty("Some-nonexisting-property") // Here if the property is not found, it will not throw exception, it will just return null.
+
+if (hasProperty("Some-nonexisting-property")){
+    println "Property exists"
+}else {
+    println "Property does not exists"
+}
+
+subprojects {
+
+    println "Running for $project.name"
+
+    apply plugin: "java"
+    apply plugin: 'io.spring.dependency-management'
+
+    version = '1.0-SNAPSHOT'
+
+
+    repositories {
+        mavenCentral()
+    }
+
+    // Apply a specific Java toolchain to ease working on different environments.
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    dependencyManagement {
+        dependencies {
+            dependency group: 'org.apache.commons', name: 'commons-lang3', version: '3.14.0'
+            dependency group: 'org.junit', name:'junit-bom', version: '5.9.1'
+        }
+    }
+}
+
+
+// ====================== applying config for a specific projects =============
+
+// Approach 1
+//project(":mymodule-1"){
+//    task("taskForMyModule1").doLast {
+//        println "Configuration for MyModule1"
+//    }
+//}
+//
+//project(":mymodule-2"){
+//    task("taskForMyModule2").doLast {
+//        println "Configuration for MyModule2"
+//    }
+//}
+
+// Approac 2
+//def projectsToConfigure = [
+//        project(":mymodule-1"),
+//        project(":mymodule-2")
+//]
+//
+//configure(projectsToConfigure) {
+//
+//    task taskForJavaProject{
+//        doLast {
+//            println "Configuration for JavaProjects $project.name"
+//        }
+//    }
+//
+//}

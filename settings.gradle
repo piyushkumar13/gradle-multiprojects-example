@@ -1,0 +1,3 @@
+rootProject.name = 'gradle-multiprojects-example'
+include 'mymodule-1', 'mymodule-2', 'mymodule-3'
+

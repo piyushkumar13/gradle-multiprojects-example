@@ -1,0 +1,21 @@
+plugins {
+    id 'application'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+
+}
+
+group = 'org.example.mymodule2'
+
+application {
+    mainClass = 'org.example.mymodule2.Main'
+}
+
+
+dependencies {
+    implementation project(':mymodule-3') // Using mymodule-3(as a library) to be used in mymodule-2
+    implementation 'org.apache.commons:commons-lang3' // Note : using without version.
+}
+
+shadowJar {
+    archiveClassifier.set('fat')
+}
