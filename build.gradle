@@ -18,6 +18,7 @@ if (hasProperty("Some-nonexisting-property")) {
     println "Property does not exists"
 }
 
+// Normally, you would use subprojects {} to keep common things here which applies to all modules(projects)
 subprojects {
 
     println "Running for $project.name"
@@ -53,6 +54,9 @@ subprojects {
 
 
 // ====================== applying config for a specific projects =============
+
+// we can also define dependencies etc at individual module(project) level using below approach.
+// Basically, whatever we want to do in module(project) individual build.gradle file it can be done in below approaches as well.
 
 // Approach 1
 //project(":mymodule-1"){
